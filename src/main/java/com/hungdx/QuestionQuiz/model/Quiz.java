@@ -11,14 +11,24 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Question {
+public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String title;
-    @ElementCollection
-    private List<String> choices;
-    private String answer;
-    private String tag;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Question> questions;
+
+    public Quiz() {
+
+    }
+
+    public Quiz(String title, List<Question> questions) {
+        this.title = title;
+        this.questions = questions;
+    }
+
 
 }

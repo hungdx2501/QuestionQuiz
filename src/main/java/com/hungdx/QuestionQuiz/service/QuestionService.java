@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,5 +42,15 @@ public class QuestionService {
 
     public void deleteAllQuestions() {
         repo.deleteAll();
+    }
+
+    public List<Question> getAllQuestionsByTag(String tag) {
+        return repo.findAllByTagIgnoreCase(tag);
+    }
+
+    public List<Question> createQuestionByTag(int number, String tag) {
+        List<Question> list = this.getAllQuestionsByTag(tag);
+        Collections.shuffle(list);
+        return list.subList(0, Math.min(number, list.size()));
     }
 }

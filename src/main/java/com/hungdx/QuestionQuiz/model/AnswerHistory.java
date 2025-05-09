@@ -11,14 +11,13 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Question {
+public class AnswerHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String title;
-    @ElementCollection
-    private List<String> choices;
-    private String answer;
-    private String tag;
-
+    private int userId;
+    @OneToMany
+    private List<Answer> answers;
+    private float score;
+    private long testTime;
 }

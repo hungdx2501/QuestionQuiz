@@ -36,6 +36,13 @@ public class QuestionController {
                 .body(list);
     }
 
+    @GetMapping("/tag/{tag}")
+    public ResponseEntity<List<Question>> getAllQuestionsByTag(@PathVariable String tag) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(service.getAllQuestionsByTag(tag));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Question> getQuestionById(@PathVariable Integer id) {
         Question question = service.getQuestionById(id).get();
